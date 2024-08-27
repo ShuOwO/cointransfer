@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shuouo.cointransfer.mapper.CurrencyMapper">
+    <resultMap id="BaseResultMap" type="com.shuouo.cointransfer.domain.Currency">
+        <id column="currency_id" jdbcType="BIGINT" property="currencyId"/>
+        <result column="currency_code" jdbcType="VARCHAR" property="currencyCode"/>
+        <result column="currency_name" jdbcType="VARCHAR" property="currencyName"/>
+        <result column="exchange_rate" jdbcType="DECIMAL" property="exchangeRate"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+    </resultMap>
+
+    <select id="findAll" resultMap="BaseResultMap">
+        SELECT currency_id, currency_code, currency_name, exchange_rate, create_time, update_time
+        FROM currency
+    </select>
+
+    <select id="findCurrencyByCurrencyCode" resultMap="BaseResultMap" parameterType="String">
+        SELECT currency_id, currency_code, currency_name, exchange_rate, create_time, update_time
+        FROM currency
+        WHERE currency_code = #{currencyCode}
+    </select>
+</mapper>
